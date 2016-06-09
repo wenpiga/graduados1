@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Agregar Datos de Alumnos {% endblock %}
+{% block content %}
+
+
+<div class="container-fluid">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="row well">
+
+		<table class="table table-bordered ">
+
+
+			<form action="."method="POST">
+		
+				<TABLE BORDER=2 WIDTH=450>
+					{% csrf_token %}
+
+					<TD>{{ form.as_p }}</TD>
+					</TABLE>
+					<br><br>
+				<button class="btn btn-info"type="submit">Grabar</button>
+				<button class="btn btn-info"type="submit">Limpiar</button>
+	
+			</form>
+		</table>
+<br>
+	{{ informacion }}
+
+<br/>
+<a href='/alumnos/page/1' class="btn btn-info">Regresar a la Lista</a>
+	
+{% endblock %}
+</div>
+</div>
+</div>

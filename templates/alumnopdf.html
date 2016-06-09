@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<table>
+    <thead style="display: table-header-group">
+    	<tr>
+            <td>
+				{% include 'empresa.html'%}<br/><br/>
+			</td>
+		</tr>
+	</thead>
+
+
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+</head>    
+
+<table cellspacing="10" cellpadding="2" border="1">
+
+<tbody>
+
+		<header>
+
+
+			<tr>
+				<td align="center">Nombres</td>
+				<td align="center">Documento</td>
+				<td align="center">Programa</td>
+				<td align="center">Libro</td>
+				<td align="center">Acta</td>
+				
+			</tr>	
+		</header>	
+
+
+		
+		{% for alumno in prueba %}  
+    	
+    		<tr>
+				<td width="150" >{{alumno.nombres}}</td>
+				<td align="center">{{alumno.nit }}</d>
+				<td align="left" width="220">{{alumno.programa}}</td>
+				<td align="center">{{alumno.libro}}</td>
+				<td align="center">{{alumno.acta}}</td>
+				
+								
+			</tr>	
+
+			<!--<p><a href="/alumno/{{p.id}}/">{{p.nombres}}</a></p>!-->
+	{% endfor %}
+</tbody>
+	
+</table>	
+	<tfoot style="display: table-footer-group">
+		<tr>
+            <td> <small>Mi pié de página.</small> </td>
+        </tr>
+    </tfoot>
+ </table>   
+</html>
