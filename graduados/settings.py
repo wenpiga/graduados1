@@ -31,11 +31,11 @@ ALLOWED_HOSTS = []
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Lima'
+TIME_ZONE = 'America/Bogota'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'es-PE'
+LANGUAGE_CODE = 'es-CO'
 
 SITE_ID = 1
 
@@ -52,7 +52,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__),'media/'))
+MEDIA_ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__),'../media/'))
 #MEDIA_ROOT= '/graduados/media/images/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
@@ -115,7 +115,7 @@ AUTH_PROFILE_MODULE ='UserProfile'
 WSGI_APPLICATION = 'graduados.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.join(os.path.dirname(__file__),'templates'),"templates"
+    os.path.join(RUTA_PROYECTO,'../templates'),
      
      #"C:/graduados/templates/"
 
@@ -123,6 +123,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
+#print TEMPLATE_DIRS
 
 
 DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
