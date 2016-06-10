@@ -3,7 +3,7 @@
 #import necesarios para trabajar.
 
 import datetime
-from helpers import vista
+#from helpers import vista
 
 from django.contrib.contenttypes.models import ContentType
 
@@ -19,7 +19,7 @@ from django.template import RequestContext
 from grados.models import Alumno,Programa
 from grados.forms import ContactForm,AddAlumnoForm,LoginForm,AlumnoForm,ProgramaForm,Miformulario,ConsultaForm,Programas
 
-from django.utils import simplejson
+import json as simplejson
 from django.utils.safestring import mark_safe
 #imports para la paginacion
 from django.core.paginator import Paginator, InvalidPage, EmptyPage

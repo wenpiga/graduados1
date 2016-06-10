@@ -3,7 +3,7 @@ Thumbs.db
 ehthumbs.db
 .idea/*
 .metadata/*
-
+*.pyc
 # Folder config file
 Desktop.ini
 
