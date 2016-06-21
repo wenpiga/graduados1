@@ -3,7 +3,7 @@
 #import necesarios para trabajar.
 
 import datetime
-#from helpers import vista
+from helpers import vista
 
 from django.contrib.contenttypes.models import ContentType
 
@@ -19,7 +19,7 @@ from django.template import RequestContext
 from grados.models import Alumno,Programa
 from grados.forms import ContactForm,AddAlumnoForm,LoginForm,AlumnoForm,ProgramaForm,Miformulario,ConsultaForm,Programas
 
-import json as simplejson
+from django.utils import simplejson
 from django.utils.safestring import mark_safe
 #imports para la paginacion
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
@@ -232,6 +232,33 @@ def search(request):
         results = []
     return render_to_response('search.html', {"results": results,"query": query.upper()})
 
+
+
+
+
+
+def search1(request):
+	
+
+    query = request.GET.get('q','')
+    if request.method == 'POST':
+    	for asistencia in request.POST.get_list('asistencia'):
+    		Alumno.objects.get(id=asistencia).update({'asistencia': True})
+
+    
+    if query:
+    	qset = (
+            Q(nombres__icontains=query) |
+            Q(programa__icontains=query)|
+            Q(acta__icontains=query) 
+           
+           
+        )
+        results = Alumno.objects.filter(qset).distinct()
+    else:
+        results = []
+    return render_to_response('search1.html', {"results": results,"query": query.upper()})
+
 	#return response
 
 def Alumnos_view(request):
@@ -344,4 +371,20 @@ def delete_view(request,id_alum):
 	 p = Alumno.objects.get(id=id_alum)
 	 p.delete()
 	 return HttpResponseRedirect('/search.html/')
+
+
+def asistencia_view(request,pagina):
+	estudiante		= 	Alumno.objects.all()
+	paginator 		=	Paginator(estudiante,7) #cuantos alumnos por pagina
+	try:
+		page = int(pagina)		
+	except:
+		page = 1	
+	try:
+		alumnos1 = paginator.page(page)
+	except:
+		(EmptyPage,InvalidPage)
+		alumnos1 = paginator.page(paginator.num_pages)
+	ctx = {'alumnos':alumnos1}
+	return render_to_response('asistencia.html',ctx,context_instance=RequestContext(request))
 

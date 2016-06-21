@@ -15,10 +15,13 @@ class Alumno(models.Model):
 	fecha=models.DateTimeField()
 	diploma=models.CharField(max_length=200)
 	sede = models.CharField(max_length=200)
+	asistencia= models.BooleanField()
 
 
 	class Meta:
 		db_table='alumno'
+
+		
 
 	def __str__(self):
 		return '%s "  " %s' % (self.nombres, self.programa)	
