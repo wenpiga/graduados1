@@ -240,7 +240,7 @@ def search(request):
 def search1(request):
 	
 
-    query = request.GET.get('q').upper()
+    query = request.GET.get('q','').upper()
     if request.method == 'POST':
     	
     	for asistencia in request.POST.getlist('asistencia'):
@@ -393,3 +393,22 @@ def asistencia_view(request,pagina):
 	ctx = {'alumnos':alumnos1}
 	return render_to_response('asistencia.html',ctx,context_instance=RequestContext(request))
 
+
+@pdf
+def mi_asistencia(request):    
+
+	prueba= Alumno.objects.filter(asistencia=1)
+	html=render_to_string('alumnopdf.html', {'alumnos': prueba},context_instance=RequestContext(request))
+	return html
+
+def borra_asistencias(request):
+	   
+    if request.method == 'POST':
+    	a = Alumno.objects.filter(asistencia=1)
+    	a.asistencia = False
+    	a.save()
+    
+    ctx = RequestContext(request)    
+    return render_to_response('borrar.html',ctx,context_instance=RequestContext(request))
+
+    
