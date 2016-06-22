@@ -240,10 +240,14 @@ def search(request):
 def search1(request):
 	
 
-    query = request.GET.get('q','')
+    query = request.GET.get('q').upper()
     if request.method == 'POST':
-    	for asistencia in request.POST.get_list('asistencia'):
-    		Alumno.objects.get(id=asistencia).update({'asistencia': True})
+    	
+    	for asistencia in request.POST.getlist('asistencia'):
+    		a = Alumno.objects.get(id=asistencia)
+    		a.asistencia = True
+    		a.save()
+    		query = request.POST.get('q').upper()
 
     
     if query:
@@ -257,7 +261,8 @@ def search1(request):
         results = Alumno.objects.filter(qset).distinct()
     else:
         results = []
-    return render_to_response('search1.html', {"results": results,"query": query.upper()})
+    contexto = RequestContext(request)    
+    return render_to_response('search1.html', {"results": results,"query": query}, contexto)
 
 	#return response
 

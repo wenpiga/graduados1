@@ -28,7 +28,7 @@
 <form action="." method="POST" enctype="multipart/form-data">
 {% csrf_token %}
 
-
+<input type="hidden" name="q" value="{{ query }}">
 <table class="table table-bordered">
       <header>
       <tr>
@@ -51,7 +51,7 @@
       <td>{{ p.programa }}</td>
 
       <td><label class="checkbox-inline">
-                <input type="checkbox" id="checkboxEnLinea1" name="asistencia" value="{{ p.id }}">
+                <input type="checkbox" id="checkboxEnLinea1" name="asistencia" value="{{ p.id }}" {% if p.asistencia %} checked{%endif%}>
             </label></td>
     
    
