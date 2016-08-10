@@ -20,13 +20,13 @@ class AlumnoResource(resources.ModelResource):
     class Meta:
         model = Alumno
       
-        fields =('id','nit','nombres','programa','libro','acta','folio','fecha','diploma','sede')    	     
+        fields =('id','nit','nombres','programa','libro','acta','folio','fecha','diploma','sede','asistencia')    	     
         #fields =('get_full_name','id','nit','nombres','programa','libro','acta','folio','fecha.datetime.strptime(date_string, format)','diploma')
 
 
 class alumnoAdmin(ImportExportActionModelAdmin):
 
-	list_display=('nit','nombres','programa','libro','acta','folio','fecha','diploma','sede')
+	list_display=('nit','nombres','programa','libro','acta','folio','fecha','diploma','sede','asistencia')
 	#list_filter=('programa','nombres')
 	search_fields=['nombres','programa']
 

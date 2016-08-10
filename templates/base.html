@@ -31,10 +31,10 @@
 			}
 
 			img {
-					border: 2px solid grey;
+					border: 1px solid grey;
 					margin: 0;
 					padding: 2;
-					border-radius: 600px;
+					border-radius: 400px;
 					width: 50px;
 					overflow: hidden;
 
@@ -51,6 +51,17 @@
 
 			}
 
+			th{
+                background-color: #222;
+                color: #fff;
+            }
+
+             td{
+                padding: 5px 40px 5px 40px;
+                background-color: #D0D0D0;
+            }
+
+
 		</style>
 	</HEAD>
 <BODY>
@@ -61,14 +72,14 @@
 			{% if user.is_authenticated %}
 				<div class="navbar-text pull-right">
 					Usuario :  {{user.first_name}}
-					<img src="/media/{{ user.get_profile.photo }}" width="100px" heigth="100px"/>
+					<img src="/media/{{user.userprofile.foto }}" width="100px" heigth="100px"/>
 						
 				</div>
 								
 			{% endif %}
 
 
-			 <div class="redondo"><img src="/media/images/logo.gif"/></div>
+			 <div class="redondo"><img src="/media/img/logo.gif"/></div>
 			<div class="navbar-header">
 				<button type="button"data-target="#navbarCollapse"data-toggle="collapse"class="navbar-toggle">
 					<span class="sr-only">Toggle navigation</span>
@@ -90,9 +101,11 @@
 					<li><a href='/alumnos/page/1'>Alumnos</a></li>
 					<li><a href='/agregar'>Registrar</a></li>
 					<li><a href='/programas'>Programas</a></li>
+					<li><a href='/asistencia/page/1'>Registro Asistencia</a></li>
+					<li><a href='/borra_asistencia'>Limpiar Asistencia</a></li>
 					<!--<li><a href='/pruebas'>Pruebas</a></li>!-->
 					{% endif %}
-					{% if user.is_authenticated %}
+					{% if user.is_authenticated and user.is_staff == True %}
 						<li><a href='/search'>Buscar Datos</a></li>
 
 						<li class="dropdown"><a class="dropdown-toggle"data-toggle="dropdown">Reportes<b class="caret"></b></a>
@@ -108,6 +121,19 @@
 						</li>
 
 					{% endif %}
+
+					{% if user.is_authenticated and user.is_staff == False %} 
+						
+						
+						<li><a href='/asistencia/page/1'>Registro Asistencia</a></li>
+						<li><a href='/search'>Buscar Datos</a></li>
+						<li><a href='/asisteciapdf'>Reporte Asistencia</a></li>
+						<li><a href='/borra_asistencia'>Limpiar Asistencia</a></li>
+								
+
+					{%endif%}
+
+
 					{% if user.is_authenticated %}
 					 <li> <a href='/logout'>Salir</a></li>
 					{% else %}

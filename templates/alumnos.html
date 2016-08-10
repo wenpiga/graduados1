@@ -13,18 +13,21 @@
 {% if alumnos %}
 	<table class="table table-bordered">
 		<header>
+		
 			<tr>
-				<td>Numero</td>
-				<td>Nombres</td>
-				<td>Nit</td>
-				<td>Programa</td>
-				<td>Libro</td>
-				<td>Acta</td>
-				<td>Ver Datos</td>
-				<td>Editar Datos</td>
-				<td>Eliminar Datos</td>
+				<th>Numero</th>
+				<th>Nombres</th>
+				<th>Nit</th>
+				<th>Programa</th>
+				<th>Libro</th>
+				<th>Acta</th>
+				<th>Ver Datos</th>
+				<th>Editar Datos</th>
+				<th>Eliminar Datos</th>
+				<th>Asistencia</th>
 								
 			</tr>	
+
 		</header>
 
 	{% for p in alumnos %}
@@ -38,8 +41,10 @@
 				<td>{{p.acta}}</td>
 				<td><a class="btn btn-default"  href="/alumno/{{p.id}}/"><span class="glyphicon glyphicon-search"></span> Ver</a></td>
 				<td><a class="btn btn-default" href="/edit/{{p.id}}/"><span class="glyphicon glyphicon-pencil"></span> Editar</a></td>
+				
 				{% if user.is_superuser %}
 				<td><a class="btn btn-default" href="/edit/{{p.id}}/"><span class="glyphicon glyphicon-pencil"></span> Eliminar</a></td>
+				
 							
 				{% endif %}
 			</tr>	

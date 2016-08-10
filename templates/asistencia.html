@@ -34,7 +34,7 @@
 				<td>{{p.programa}}</td>
 				
 				<td><label class="checkbox-inline">
-  							<input type="checkbox" id="checkboxEnLinea1" name="asistencia" value="{{ p.id }}">
+  							<input type="checkbox" id="checkboxEnLinea1" name="asistencia" value="{{ p.id }}" {% if p.asistencia %} checked{%endif%}>
   					</label></td>
 				
 			</tr>	
@@ -43,7 +43,8 @@
 	{% endfor %}
 	</table>
 
-	<button class="btn btn-default btn-lg" type="submit"><span class="glyphicon glyphicon-saved"></span> Gaurdar Cambios </button>
+	<!--<button class="btn btn-default btn-lg" type="submit"><span class="glyphicon glyphicon-saved"></span> Gaurdar Cambios </button>!-->
+	
 {% else %}
 	<h2> No Existen Alumnos a Consultar  :( </h2>
 

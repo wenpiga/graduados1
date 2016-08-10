@@ -217,7 +217,7 @@ def edit_view(request,id_alum):
 	return render_to_response('editaralumno.html',ctx,context_instance=RequestContext(request))
 
 def search(request):
-    query = request.GET.get('q','')
+    query = request.GET.get('q','').upper()
     
     if query:
     	qset = (
@@ -240,14 +240,14 @@ def search(request):
 def search1(request):
 	
 
-    query = request.GET.get('q','').upper()
+    query = str(request.GET.get('q','')).upper()
     if request.method == 'POST':
     	
     	for asistencia in request.POST.getlist('asistencia'):
     		a = Alumno.objects.get(id=asistencia)
     		a.asistencia = True
     		a.save()
-    		query = request.POST.get('q').upper()
+    		query = str(request.POST.get('q')).upper()
 
     
     if query:
@@ -403,12 +403,11 @@ def mi_asistencia(request):
 
 def borra_asistencias(request):
 	   
-    if request.method == 'POST':
-    	a = Alumno.objects.filter(asistencia=1)
-    	a.asistencia = False
-    	a.save()
     
-    ctx = RequestContext(request)    
-    return render_to_response('borrar.html',ctx,context_instance=RequestContext(request))
+    a = Alumno.objects.filter(asistencia=True).update( asistencia = False)
+    	
+    return HttpResponseRedirect('/')
+  
+    
 
     

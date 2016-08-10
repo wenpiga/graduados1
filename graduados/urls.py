@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^$','grados.views.index_view'),
     url(r'^about/','grados.views.about_view'),
     url(r'^alumnos/page/(?P<pagina>.*)/$','grados.views.alumnos_view'),
+    url(r'^asistencia/page/(?P<pagina>.*)/$','grados.views.asistencia_view'),
     url(r'^contactos/','grados.views.contacto_view'),
     #url(r'^consultar/','grados.views.informe_alumno'),
     url(r'^agregar/','grados.views.add_alumno'),
@@ -31,12 +32,17 @@ urlpatterns = patterns('',
     url(r'^logout/','grados.views.logout_view'),
     url(r'^edit/(?P<id_alum>.*)/$','grados.views.edit_view'),
     url(r'^search/', 'grados.views.search'),
+    url(r'^search1/', 'grados.views.search1'),
     url(r'^programas/', 'grados.views.Progama_view'),
     #url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.MEDIA_ROOT}),
     url(r'^pruebas/','grados.views.fechas_view'),
     url(r'^consultas/','grados.views.consultafecha'),
     url(r'^eliminar/(?P<id_alum>\d+)/$','grados.views.delete_view'),
+    url(r'^asisteciapdf/','grados.views.mi_asistencia'),
+    url(r'^borra_asistencia/','grados.views.borra_asistencias'),
+
+
 
     
 	

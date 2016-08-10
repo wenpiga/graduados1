@@ -3,11 +3,13 @@
 {% block content %}
 <br> Aplicativo para consulta de graduados</br>
 {% if user.is_authenticated %}
-	<p>Bienvenido {{user.username}}</p>
-	{% if User.get_profile.foto %}
-		<img src="/media{{user.get_profile.foto}}"width="100px" heigth="100px"/>
-	{% endif %}	
+	<p>Bienvenido {{user.first_name}}</p>
+	
 
+		<!--<img src="/media/{{user.userprofile.foto }}" width="100px" heigth="100px"/>!-->
+		
+	
+	
 {% endif %}
 
  {% endblock %}
