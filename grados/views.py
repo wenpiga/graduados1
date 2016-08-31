@@ -222,7 +222,7 @@ def search(request):
     if query:
     	qset = (
             Q(nombres__icontains=query) |
-            Q(programa__icontains=query)|
+            Q(nit__icontains=query)|
             Q(acta__icontains=query) 
            
            
@@ -253,7 +253,7 @@ def search1(request):
     if query:
     	qset = (
             Q(nombres__icontains=query) |
-            Q(programa__icontains=query)|
+            Q(nit__icontains=query)|
             Q(acta__icontains=query) 
            
            
