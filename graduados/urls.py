@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from grados import views
+from grados.views import  ReportePersonasExcel
 import settings
 #from django.conf.urls.defaults import *
 
@@ -41,6 +42,9 @@ urlpatterns = patterns('',
     url(r'^eliminar/(?P<id_alum>\d+)/$','grados.views.delete_view'),
     url(r'^asisteciapdf/','grados.views.mi_asistencia'),
     url(r'^borra_asistencia/','grados.views.borra_asistencias'),
+    url(r'^reporte_personas_excel/$',ReportePersonasExcel.as_view(), ),
+         
+
 
 
 

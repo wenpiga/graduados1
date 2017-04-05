@@ -27,6 +27,8 @@ class AddAlumnoForm(forms.Form):
 		'''fecha		=forms.DateField()'''
 		fecha		= forms.DateField(widget=widgets.AdminDateWidget()) 
 		diploma		= forms.CharField(widget=forms.TextInput())
+		sede		= forms.CharField(widget=forms.TextInput())
+		asistencia	= forms.BooleanField(required=False)
 
 
 		'''class Meta:
@@ -76,7 +78,8 @@ class ConsultaForm(forms.Form):
 		super(ConsultaForm,self).__init__(*args, **kwargs)
 		self.fields['Fecha_Inicial'].widget = widgets.AdminDateWidget()
 		self.fields['Fecha_Final'].widget = widgets.AdminDateWidget()'''
-		
+
+
 
 
 	

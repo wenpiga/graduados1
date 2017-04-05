@@ -9,6 +9,7 @@ from import_export.admin import ImportExportModelAdmin
 from import_export.admin import ImportExportActionModelAdmin
 
 from import_export import resources
+from import_export import fields
 #from django.core.models import Alumno
 
 #from core.models import Alumno
@@ -20,7 +21,7 @@ class AlumnoResource(resources.ModelResource):
     class Meta:
         model = Alumno
       
-        fields =('id','nit','nombres','programa','libro','acta','folio','fecha','diploma','sede','asistencia')    	     
+        fields =('nit','nombres','programa','libro','acta','folio','fecha','diploma','sede','asistencia')    	     
         #fields =('get_full_name','id','nit','nombres','programa','libro','acta','folio','fecha.datetime.strptime(date_string, format)','diploma')
 
 

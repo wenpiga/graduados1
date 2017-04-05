@@ -40,7 +40,11 @@ from reportlab.platypus.doctemplate import SimpleDocTemplate
 from reportlab.platypus import Paragraph, Spacer
 #from reportlab.lib import sytles
 from django.db.models import F
-
+from django.views.generic.base import TemplateView
+#Workbook nos permite crear libros en excel
+from openpyxl import Workbook
+#Nos devuelve un objeto resultado, en este caso un archivo de excel
+from django.http.response import HttpResponse
 
 
 
@@ -127,6 +131,7 @@ def add_alumno(Request):
 					folio 		= form.cleaned_data['folio']
 					fecha		= form.cleaned_data['fecha']
 					diploma		= form.cleaned_data['diploma']
+					asistencia	= form.cleaned_data['asistencia']
 
 					p 			= Alumno()
 					p.nit		= nit
@@ -137,6 +142,7 @@ def add_alumno(Request):
 					p.folio 	= folio
 					p.fecha 	= fecha
 					p.diploma	= diploma
+					p.asistencia= asistencia
 					p.save() # guardar la informacion
 
 					info= "Se guardo satisfactoriamente!!!"
@@ -212,9 +218,13 @@ def edit_view(request,id_alum):
 						 'folio' :P.folio,
 						 'fecha' :P.fecha,
 				})
-	ctx =	{'form':form,'Alumno':P}
+		
+		ctx ={'form':form,'Alumno':P}
 			
-	return render_to_response('editaralumno.html',ctx,context_instance=RequestContext(request))
+		return render_to_response('editaralumno.html',ctx,context_instance=RequestContext(request))
+	else:
+		return HttpResponseRedirect('/')
+
 
 def search(request):
     query = request.GET.get('q','').upper()
@@ -333,7 +343,7 @@ def prueba_vista(request):
 
 def fechas_view(request):
 	form = ConsultaForm()
-	return render_to_response('consulta1.html', {'form': form}, context_instance=RequestContext(request) )
+	return render_to_response('consulta2.html', {'form': form}, context_instance=RequestContext(request) )
 
 @pdf
 def consultafecha(request):
@@ -347,8 +357,10 @@ def consultafecha(request):
 	#f_inicial= request.POST['Fecha_Inicial'] se cambio por el dato anterior para convertir el formato de fecha del calendario
 	f_cierre= fecha1
 	
-	prueba = Alumno.objects.filter( fecha__range=(f_inicial,f_cierre))
+	prueba = Alumno.objects.filter( fecha__range=(f_inicial,f_cierre)).order_by('fecha')
 	prueba.group_by=['programa']
+
+
 	
 	#prueba = Alumno.objects.filter(fecha__range=( Fecha_Incial, Fecha_Final ))
 	html=render_to_string('alumnopdf.html', {'prueba': prueba},context_instance=RequestContext(request))
@@ -398,7 +410,7 @@ def asistencia_view(request,pagina):
 def mi_asistencia(request):    
 
 	prueba= Alumno.objects.filter(asistencia=1)
-	html=render_to_string('alumnopdf.html', {'alumnos': prueba},context_instance=RequestContext(request))
+	html=render_to_string('alumnopdf.html', {'prueba': prueba},context_instance=RequestContext(request))
 	return html
 
 def borra_asistencias(request):
@@ -409,5 +421,44 @@ def borra_asistencias(request):
     return HttpResponseRedirect('/')
   
     
-
+# Genera exporta a excel la consulta que se haga en la pagina
     
+class ReportePersonasExcel(TemplateView):
+     
+    #Usamos el método get para generar el archivo excel 
+    def get(self, request, *args, **kwargs):
+        #Obtenemos todas las personas de nuestra base de datos
+        personas = Alumno.objects.all()
+        #Creamos el libro de trabajo
+        wb = Workbook()
+        #Definimos como nuestra hoja de trabajo, la hoja activa, por defecto la primera del libro
+        ws = wb.active
+        #En la celda B1 ponemos el texto 'REPORTE DE PERSONAS'
+        ws['B1'] = 'REPORTE DE GRADUADOS'
+        #Juntamos las celdas desde la B1 hasta la E1, formando una sola celda
+        ws.merge_cells('B1:E1')
+        #Creamos los encabezados desde la celda B3 hasta la E3
+        ws['B3'] = 'DOCUMENTO'
+        ws['C3'] = 'NOMBRES'
+        ws['D3'] = 'PROGRAMA'
+        ws['E3'] = 'ACTA'       
+        ws['F3'] = 'FOLIO' 
+        ws['G3'] = 'FECHA' 
+        cont=6
+        #Recorremos el conjunto de personas y vamos escribiendo cada uno de los datos en las celdas
+        for persona in personas:
+            ws.cell(row=cont,column=2).value = persona.nit
+            ws.cell(row=cont,column=3).value = persona.nombres
+            ws.cell(row=cont,column=4).value = persona.programa
+            ws.cell(row=cont,column=5).value = persona.acta
+            ws.cell(row=cont,column=6).value = persona.folio
+            ws.cell(row=cont,column=7).value = persona.fecha
+            cont = cont + 1
+        #Establecemos el nombre del archivo
+        nombre_archivo ="ReportePersonasExcel.xlsx"
+        #Definimos que el tipo de respuesta a devolver es un archivo de microsoft excel
+        response = HttpResponse(content_type="application/ms-excel") 
+        contenido = "attachment; filename={0}".format(nombre_archivo)
+        response["Content-Disposition"] = contenido
+        wb.save(response)
+        return response
