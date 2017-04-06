@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Agregar Datos de Estudiantes {% endblock %}
+{% block content %}
+
+
+
+
+<div class="container-fluid">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="row well">
+
+		<table class="table table-bordered ">
+		<thead>
+			<tr>
+				<th><p align="center" ><font size=5 font color="WHITE"> REGISTRO DE  ESTUDIANTES</font></th></p>
+			</tr>
+		</thead>
+
+
+			<form action="." method="POST" enctype="multipart/form-data">
+
+
+		
+				<TABLE  WIDTH="70%">
+					{% csrf_token %}
+					
+						<tr><td>{{form.nit.label}}</td><td> <input type="text" size="20" maxlength="20" name="nit"></td></tr>
+						<tr><td>{{form.nombres.label}}</td><td><input type="text" size="50" maxlength="50" name="nombres"></input><br/></td></tr>
+						<tr><td>{{form.programa.label}}</td><td>{{form.programa}}<br/></td></tr>
+						<tr><td>{{form.sede.label}}</td><td><input type="text" size="50" maxlength="50" name="sede"></input><br/></td></tr></td></tr>
+						<tr><td>{{form.votacion.label}}</td><td>{{form.votacion}}</td></tr>
+						<br><br>
+
+				</TABLE><BR/>
+					
+
+				<button class="btn btn-info" type="submit">Gravar</button>
+				<button class="btn btn-info" type="reset">Limpiar</button>
+
+				
+	
+			</form>
+		</table>
+<br>
+	{{ informacion }}
+
+<br/>
+<a href='/' class="btn btn-info">Regresar</a>
+	
+{% endblock %}
+</div>
+</div>
+</div>

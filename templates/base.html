@@ -52,13 +52,16 @@
 			}
 
 			th{
-                background-color: #222;
+                background-color: #848484;
                 color: #fff;
             }
 
              td{
                 padding: 5px 40px 5px 40px;
                 background-color: #D0D0D0;
+            }
+            table{
+            	font-size: 12px;
             }
 
 
@@ -98,9 +101,11 @@
 
 					<li><a href='/contactos'>Contacto</a></li>
 					{% if user.is_superuser = True %}
+					<!--<li><a href='/reporte_personas_excel'>Alumnos</a></li>!-->
 					<li><a href='/alumnos/page/1'>Alumnos</a></li>
 					<li><a href='/agregar'>Registrar</a></li>
 					<li><a href='/programas'>Programas</a></li>
+					<li><a href='/estudiantes'>Estudiantes</a></li>
 					<li><a href='/asistencia/page/1'>Registro Asistencia</a></li>
 					<li><a href='/borra_asistencia'>Limpiar Asistencia</a></li>
 					<!--<li><a href='/pruebas'>Pruebas</a></li>!-->
@@ -108,7 +113,7 @@
 					{% if user.is_authenticated and user.is_staff == True %}
 						<li><a href='/search'>Buscar Datos</a></li>
 
-						<li class="dropdown"><a class="dropdown-toggle"data-toggle="dropdown">Reportes<b class="caret"></b></a>
+						<li class="dropdown"><a class="dropdown-toggle"data-toggle="dropdown">Informes<b class="caret"></b></a>
 							
 							<ul class="dropdown-menu">
 
@@ -116,6 +121,8 @@
 								<li><a  href="/reporte">Graduados Por Fecha</a></li>
 								<li><a  href="/Reporte2">Graduados Por Programa</a></li>
 								<li><a  href="/programas1">Reporte Programas</a></li>
+								<li><a href='/asisteciapdf'>Reporte Asistencia</a></li>
+
 								
 							</ul>
 						</li>

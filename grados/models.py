@@ -48,4 +48,17 @@ class userProfile(models.Model):
 	def __unicode__(self):
 		return self.user.username
 
+class Estudiante(models.Model):
+	nit			= models.CharField(max_length=200)
+	nombres		= models.CharField(max_length=200)
+	programa    = models.ForeignKey(Programa, null=True, blank=True)
+	sede 		= models.CharField(max_length=200)
+	votacion	= models.BooleanField()
+
+	class Meta:
+		db_table ='estudiante'
+	def __unicode__(self):
+		return self.nombres
+
+
 

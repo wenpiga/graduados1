@@ -2,47 +2,46 @@
 
 <html>
 <table>
-    <thead style="display: table-header-group">
+     <thead style="display: table-header-group">
     	<tr>
-            <td>
-				{% include 'empresa.html'%}<br/><br/>
-			</td>
+            <th>
+
+               <h1>{% include 'empresa.html'%}</h1>
+			</th>
 		</tr>
 	</thead>
-
-
-<head>
-
+	
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-</head>    
-
-<table cellspacing="10" cellpadding="2" border="1">
+ 
+<table style="font-size:9px" cellspacing="10" cellpadding="2" border="1">
 
 <tbody>
 
-		<header>
+		<header background-color: #f00;>
 
 
-			<tr>
+			<tr >
 				<td align="center">Nombres</td>
 				<td align="center">Documento</td>
 				<td align="center">Programa</td>
 				<td align="center">Libro</td>
 				<td align="center">Acta</td>
+				<td align="center">Fecha</td>
 				
 			</tr>	
 		</header>	
 
 
 		
-		{% for alumno in alumnos %}  
+		{% for alumno in prueba %}  
     	
     		<tr>
 				<td width="150" >{{alumno.nombres}}</td>
-				<td align="center">{{alumno.nit }}</d>
-				<td align="left" width="220">{{alumno.programa}}</td>
-				<td align="center">{{alumno.libro}}</td>
-				<td align="center">{{alumno.acta}}</td>
+				<td align="left" width="60">{{alumno.nit }}</d>
+				<td align="left" width="150">{{alumno.programa}}</td>
+				<td width=30 align="center">{{alumno.libro}}</td>
+				<td width=30 align="center">{{alumno.acta}}</td>
+				<td width=130 align="center">{{alumno.fecha}}</td>
 				
 								
 			</tr>	
@@ -57,5 +56,7 @@
             <td> <small>Mi pié de página.</small> </td>
         </tr>
     </tfoot>
- </table>   
+ </table>
+ </body>   
+ </table>
 </html>

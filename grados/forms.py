@@ -1,7 +1,7 @@
 from django import forms
 from models import Alumno
 from django.contrib.admin import widgets
-from models import Programa
+from models import Programa, Estudiante
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 
@@ -89,6 +89,12 @@ prog = Programa.objects.all().values_list('nombre', 'nombre')
 class Programas(forms.Form):
 	programa	= forms.ChoiceField(choices=prog)
 
+
+class EstudianteForm(ModelForm):
+	
+	class Meta:
+		model =	Estudiante
+		fields = '__all__'
 
 
 

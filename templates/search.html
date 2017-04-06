@@ -10,7 +10,7 @@
       <div class="row well">
 
 
-  <h2> "Digite Primeras Letras del Nombre o Apellido"</h1>
+  <h2> "Digite Primeras Letras del Nombre o Apellido y/o Documento"</h1>
   <form action="." method="GET">
     <label for="q">Buscar: </label>
     <input type="text" name="q" value="{{ query|escape }}">
@@ -29,6 +29,7 @@
         <th>Nombres</th>
         <th>Programa</th>
         <th>Ver Detalles</th>
+        <th> Editar</th>
        
        
        <!-- <td>Acta</td>
@@ -45,6 +46,7 @@
       <td>{{ p.programa }}</td>
      
       <td><a class="btn btn-default"  href="/alumno/{{p.id}}/"><span class="glyphicon glyphicon-search"></span> Ver</a></td>
+      <td><a class="btn btn-default" href="/edit/{{p.id}}/"><span class="glyphicon glyphicon-pencil"></span> Editar</a></td>
      
    
            

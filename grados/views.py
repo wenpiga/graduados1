@@ -16,8 +16,8 @@ from django.template.loader import render_to_string
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
-from grados.models import Alumno,Programa
-from grados.forms import ContactForm,AddAlumnoForm,LoginForm,AlumnoForm,ProgramaForm,Miformulario,ConsultaForm,Programas
+from grados.models import Alumno,Programa,Estudiante
+from grados.forms import ContactForm,AddAlumnoForm,LoginForm,AlumnoForm,ProgramaForm,Miformulario,ConsultaForm,Programas,EstudianteForm
 
 from django.utils import simplejson
 from django.utils.safestring import mark_safe
@@ -462,3 +462,25 @@ class ReportePersonasExcel(TemplateView):
         response["Content-Disposition"] = contenido
         wb.save(response)
         return response
+
+def Estudiante_view(request):
+	'''import pdb
+	pdb.set_trace()'''
+	informacion= " "
+	if request.method=='POST':
+		form = EstudianteForm(request.POST,request.FILES)
+
+		if form.is_valid():
+			form.save()
+			informacion =" Registro Efectuado Corectamente"
+			ctx  =	{'form': form}
+			return render_to_response('estudiante.html',ctx,context_instance=RequestContext(request))
+			#return HttpResponseRedirect('/')
+	else:
+		form = EstudianteForm()
+	#return render_to_response('programas2.html', {'form': form},context_instance=RequestContext(request))
+	return render_to_response('estudiante.html',{'form':form},context_instance=RequestContext(request))
+	
+	
+	
+

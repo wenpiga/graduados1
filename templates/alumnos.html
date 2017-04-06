@@ -6,12 +6,19 @@
 {% if user.is_authenticated %} 
 {% if user.is_superuser = True %}
 <a class="btn btn-info" href="/agregar"><span class="glyphicon glyphicon-plus"></span> Nuevo</a></td>
+<div class="col-lg-1">
+    <a id="crear_detalle" href="/reporte_personas_excel" class="btn btn-info btn-block">
+        <span class="glyphicon glyphicon-list-alt"></span>Excel
+    </a>
+</div>
 {% endif %}
 <td><a class="btn btn-default" href="/search/{{p.id}}/"><span class="glyphicon glyphicon-eye-open"></span> Buscar</a></td>
+
 {% endif %}
 <!--<a href='/agregar'>Agregar nuevo</a><br>!-->
 {% if alumnos %}
 	<table class="table table-bordered">
+
 		<header>
 		
 			<tr>
@@ -42,8 +49,11 @@
 				<td><a class="btn btn-default"  href="/alumno/{{p.id}}/"><span class="glyphicon glyphicon-search"></span> Ver</a></td>
 				<td><a class="btn btn-default" href="/edit/{{p.id}}/"><span class="glyphicon glyphicon-pencil"></span> Editar</a></td>
 				
+				
+				
 				{% if user.is_superuser %}
 				<td><a class="btn btn-default" href="/edit/{{p.id}}/"><span class="glyphicon glyphicon-pencil"></span> Eliminar</a></td>
+				
 				
 							
 				{% endif %}
@@ -79,5 +89,36 @@
 
 	<h4> Página {{alumnos.number}} de {{alumnos.paginator.num_pages}}</h4>
 {% endif %}	
+
+{% block js %}
+<script>
+$(document).ready(function() 
+{   
+    var table = $('#tabla').DataTable( {
+        "language": {
+            url: "/static/localizacion/es_ES.json"
+        }
+    } );
+  
+    $('#tabla tbody').on( 'click', 'tr', function() 
+    {
+        if ($(this).hasClass('selected') ) 
+        {           
+            $(this).removeClass('selected');
+             
+        }
+        else 
+        {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');                      
+        }
+    });   
+     
+});
+</script>
+{% endblock js %}
+
+
+
 
 {% endblock %}
